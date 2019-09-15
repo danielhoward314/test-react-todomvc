@@ -8,6 +8,11 @@
   width: 50vw;
   padding: 20px;
   margin-bottom: 30px;
+  @media screen and (max-width: 27em) {
+    width: 80vw;
+    margin-bottom: 15px;
+    padding: 10px;
+  }
   background-color: #ffffff;
   transition: box-shadow 200ms ease-in;
   border: 1px solid #EBEBEB;

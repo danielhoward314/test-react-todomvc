@@ -12,6 +12,9 @@ html, body, main {
 h3 {
   margin: 0;
   font-size: 1.75em;
+  @media screen and (max-width: 27em) {
+    font-size: 1.25em;
+  }
 }
 
 ul {
@@ -22,6 +25,14 @@ ul {
   padding-bottom: 20px;
   padding-left: 30px;
   margin-bottom: 30px;
+  @media screen and (max-width: 27em) {
+    width: 80vw;
+    padding-top: 10px;
+    padding-right: 0px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    margin-bottom: 15px;
+  }
   background-color: #ffffff;
   transition: box-shadow 200ms ease-in;
   border: 1px solid #EBEBEB;
