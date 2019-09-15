@@ -1,0 +1,30 @@
+html, body, main {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica', sans-serif;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  background-color: honeydew;
+}
+
+h3 {
+  margin: 0;
+  font-size: 1.75em;
+}
+
+ul {
+  list-style-type: none;
+  width: 50vw;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  margin-bottom: 30px;
+  background-color: #ffffff;
+  transition: box-shadow 200ms ease-in;
+  border: 1px solid #EBEBEB;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
