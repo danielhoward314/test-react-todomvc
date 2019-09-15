@@ -1,0 +1,23 @@
+{
+  "name": "test-react-todomvc",
+  "version": "1.0.0",
+  "description": "A great challenge from Genius Plaza!",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielhoward314/test-react-todomvc.git"
+  },
+  "keywords": [
+    "todo",
+    "react"
+  ],
+  "author": "Daniel Howard",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danielhoward314/test-react-todomvc/issues"
+  },
+  "homepage": "https://github.com/danielhoward314/test-react-todomvc#readme"
+}
