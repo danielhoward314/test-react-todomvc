@@ -3,11 +3,20 @@ import React, { useReducer, useState, useRef } from 'react';
 import '../styles/base.scss'
 import '../styles/app.scss';
 
-import todosReducer, { initialState, addTodo, removeTodo } from '../reducers/TodosReducer'
+import todosReducer, { initialState, addTodo, removeTodo, changeStatus } from '../reducers/TodosReducer'
 
 const App = () => {
   // reducer for state management of todos array
   const [state, dispatch] = useReducer(todosReducer, initialState);
+
+  // reduce fn to calculate # of active todos
+  const calcActives = (todos) => {
+    return todos.reduce((accumulator, todo) => {
+      if (!todo.isCompleted) return ++accumulator
+      else return accumulator
+    }, 0)
+  }
+  const activesCount = state.todos ? calcActives(state.todos) : 0
 
   // state of form input and event handlers
   const [description, setDescription] = useState('')
@@ -39,17 +48,21 @@ const App = () => {
    // delete button event handler
    const handleDelete = (todo) => {
      return dispatch(removeTodo(todo))
-   }
+    }
+    // mark-complete button event handler
+    const handleStatus = (todo) => {
+      return dispatch(changeStatus(todo))
+    }
 
     return (
         <main>
             <header>
                 <h3>Todos List</h3>
                 {state.todos && (
-                    <p>
-                        <strong>{state.todos.length}</strong>
-                        <span>{` item${state.todos.length === 1 ? '' : 's'}`}</span>
-                    </p>
+                  <p>
+                    <strong>{activesCount}</strong>
+                    <span>{` item${activesCount === 1 ? '' : 's'}`}</span>
+                  </p>
                 )}
             </header>
             <form onSubmit={handleSubmit}>
@@ -68,7 +81,8 @@ const App = () => {
                                 <span>{todo.description}</span>
                                 {hovered.bool && (hovered.todoId === todo.id) &&
                                 <button onClick={() => handleDelete(todo)}><span>Delete?</span></button>}
-                                <button>
+                                <button onMouseEnter={(evt) => handleEnter(evt)}
+                                onMouseLeave={(evt) => handleLeave(evt)} onClick={() => handleStatus(todo)}>
                                     <span>✓</span>
                                 </button>
                             </li>

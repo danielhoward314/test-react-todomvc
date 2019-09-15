@@ -6,6 +6,7 @@ export const initialState = {
 
 const ADD = 'ADD'
 const REMOVE = 'REMOVE'
+const CHANGE_STATUS = 'CHANGE_STATUS'
 
 export const addTodo = (description) => {
   description = description.trim()
@@ -27,6 +28,8 @@ export const removeTodo = (todo) => {
   }
 }
 
+export const changeStatus = (todo) => ({type: CHANGE_STATUS, todo})
+
 function todosReducer(state, action) {
   switch (action.type) {
     case ADD:
@@ -36,6 +39,14 @@ function todosReducer(state, action) {
     case REMOVE:
       return {
         todos: state.todos.filter((todo) => todo.id !== action.todo.id)
+      }
+    case CHANGE_STATUS:
+      return {
+        todos: state.todos.filter((todo) => {
+          if (todo.id !== action.todo.id) return todo
+          todo.isCompleted = !todo.isCompleted
+          return todo
+        })
       }
     default:
       return state
