@@ -1,9 +1,9 @@
 
-import React, { useReducer, useState } from 'react';
+import React, { useReducer, useState, useRef } from 'react';
 import '../styles/base.scss'
 import '../styles/app.scss';
 
-import todosReducer, { initialState, addTodo } from '../reducers/TodosReducer'
+import todosReducer, { initialState, addTodo, removeTodo } from '../reducers/TodosReducer'
 
 const App = () => {
   // reducer for state management of todos array
@@ -23,6 +23,23 @@ const App = () => {
     if (!evt.target.value) setIsEmpty(true)
     else setIsEmpty(false)
   }
+
+   // DOM ref, state and event handlers for todo <li> hover events
+   let refs = useRef(new Map()).current;
+   const [hovered, setHovered] = useState({todoId: null, bool: false})
+   const handleEnter = (evt, id) => {
+       if (event.target.classList.contains('button--status')) return;
+       return setHovered({todoId: id, bool: true})
+   }
+   const handleLeave = (evt, id) => {
+       if (event.target.classList.contains('button--status')) return;
+       return setHovered({todoId: id, bool: false})
+   }
+
+   // delete button event handler
+   const handleDelete = (todo) => {
+     return dispatch(removeTodo(todo))
+   }
 
     return (
         <main>
@@ -45,8 +62,12 @@ const App = () => {
                 <ul>
                     {state.todos.map((todo) => {
                         return (
-                            <li key={todo.id}>
+                            <li key={todo.id} onMouseEnter={(evt) => handleEnter(evt, todo.id)}
+                            onMouseLeave={(evt) => handleLeave(evt, todo.id)}
+                            ref={inst => inst === null ? refs.delete(todo.id) : refs.set(todo.id, inst)}>
                                 <span>{todo.description}</span>
+                                {hovered.bool && (hovered.todoId === todo.id) &&
+                                <button onClick={() => handleDelete(todo)}><span>Delete?</span></button>}
                                 <button>
                                     <span>✓</span>
                                 </button>

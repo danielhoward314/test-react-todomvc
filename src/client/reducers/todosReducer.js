@@ -5,6 +5,7 @@ export const initialState = {
 }
 
 const ADD = 'ADD'
+const REMOVE = 'REMOVE'
 
 export const addTodo = (description) => {
   description = description.trim()
@@ -19,11 +20,22 @@ export const addTodo = (description) => {
   }
 }
 
+export const removeTodo = (todo) => {
+  return {
+    type: REMOVE,
+    todo
+  }
+}
+
 function todosReducer(state, action) {
   switch (action.type) {
     case ADD:
       return {
         todos: state.todos.concat(action.todo)
+      }
+    case REMOVE:
+      return {
+        todos: state.todos.filter((todo) => todo.id !== action.todo.id)
       }
     default:
       return state
